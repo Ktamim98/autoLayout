@@ -53,14 +53,40 @@ class ViewController: UIViewController {
         view.addSubview(lable4)
         view.addSubview(lable5)
         
+
+//        let viewDictonary = ["lable1": lable1, "lable2": lable2, "lable3": lable3, "lable4": lable4, "lable5": lable5]
+//
+//
+//        for lable in viewDictonary.keys{
+//            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(lable)]|", options: [], metrics: nil, views: viewDictonary))
+//        }
+//
+//        let metrics = ["newHeight": 88]
+//
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[lable1(newHeight@999)]-[lable2(lable1)]-[lable3(lable1)]-[lable4(lable1)]-[lable5(lable1)]->=10-|", options: [], metrics: metrics, views: viewDictonary))
         
-        let viewDictonary = ["lable1": lable1, "lable2": lable2, "lable3": lable3, "lable4": lable4, "lable5": lable5]
         
+        var previous: UILabel?
         
-        for lable in viewDictonary.keys{
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(lable)]|", options: [], metrics: nil, views: viewDictonary))
+        for lable in [lable1, lable2, lable3, lable4, lable5] {
+//            lable.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            lable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+            lable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+//            lable.heightAnchor.constraint(equalToConstant: 88).isActive = true
+            
+            lable.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2, constant: -10).isActive = true
+            lable.textAlignment = .center
+            
+            if let previous = previous {
+                lable.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
+            }else {
+                lable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+            }
+            previous = lable
         }
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[lable1]-[lable2]-[lable3]-[lable4]-[lable5]", options: [], metrics: nil, views: viewDictonary))
+        
+        
+        
     }
 
 
